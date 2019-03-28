@@ -1,1 +1,6 @@
-./**/.idea
+*.pdf
+.idea/
+out/
+*.jar
+*.war
+.gradle
