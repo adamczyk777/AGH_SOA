@@ -4,9 +4,56 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            type="javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            type="javascript"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            type="javascript"></script>
+</h:head>
 <h:body>
-    <h:outputText>Hello World</h:outputText>
+    <div class="navbar navbar-light bg-light">
+        <h:link class="navbar-brand" href="">
+            Books
+        </h:link>
+        <div class="container">
+            <h:dataTable value="#{BookManager.getBookList()}" var="book">
+                <!--<h:column>-->
+                <!--<h:selectBooleanCheckbox value="#{BookManager.selectedBooks[book.id]}" />-->
+                <!--</h:column>-->
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{book.getTitle()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Author</f:facet>
+                    <h:outputText value="#{book.getAuthor()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Genre</f:facet>
+                    <h:outputText value="#{book.getType()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Price</f:facet>
+                    <h:outputText value="#{book.getPrice()}"/>
+                    <!--<h:outputText value="#{book.getPrice()}" rendered="#{BookManager.currency == 'ORIGINAL'}" />-->
+                    <!--<h:outputText value="#{book.getPriceFormattedInCurrency(BookManager.currencyEnum)}" rendered="#{BookManager.currency != 'ORIGINAL'}" />-->
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Currency</f:facet>
+                    <h:outputText value="#{book.currencygetCurrency()}"/>
+                    <!--<h:outputText value="#{book.currency}" rendered="#{BookManager.currency == 'ORIGINAL'}" />-->
+                    <!--<h:outputText value="#{BookManager.currency}" rendered="#{BookManager.currency != 'ORIGINAL'}" />-->
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pages</f:facet>
+                    <h:outputText value="#{book.getPagesCount()}"/>
+                </h:column>
+            </h:dataTable>
+        </div>
+    </div>
 </h:body>
 </html>
