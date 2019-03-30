@@ -4,9 +4,70 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            type="javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            type="javascript"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            type="javascript"></script>
+    <title>Vetements Poll</title>
+</h:head>
 <h:body>
-    <h:outputText>Hello World</h:outputText>
+    <div class="navbar navbar-dark bg-dark">
+        <h:link class="navbar-brand" href="">
+            VETEMENTS
+        </h:link>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h:form id="firstForm">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <h:inputText styleClass="form-control" id="name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Surname:</label>
+                        <h:inputText styleClass="form-control" id="surname"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email:</label>
+                        <h:inputText styleClass="form-control" id="email"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Age:</label>
+                        <h:inputText styleClass="form-control" id="age"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Gender:</label>
+                        <h:selectOneMenu styleClass="form-control" id="gender" value="#{FormManager.selectedGender}">
+                            <f:selectItems value="#{BookManager.bookTypes}" var="genre" itemLabel="#{genre}"/>
+                            <f:ajax event="change" render="booksTable"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Education:</label>
+                        <h:selectOneMenu styleClass="form-control" id="education" value="#{FormManager.selectedGender}">
+                            <f:selectItems value="#{BookManager.bookTypes}" var="genre" itemLabel="#{genre}"/>
+                            <f:ajax event="change" render="booksTable"/>
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Height:</label>
+                        <h:inputText styleClass="form-control" id="height"/>
+                    </div>
+                    <!--<div>-->
+
+                    <!--</div>-->
+                </h:form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
 </h:body>
 </html>
