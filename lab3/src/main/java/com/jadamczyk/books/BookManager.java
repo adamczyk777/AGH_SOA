@@ -2,9 +2,7 @@ package com.jadamczyk.books;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Named("BookManager")
 @ApplicationScoped
@@ -14,7 +12,16 @@ public class BookManager {
     private Double priceToFilter = null;
     private BookType selectedGenre = null;
     private BookList bookList = new BookList();
+    private Map<Integer, Boolean> addedToCart = new HashMap<>();
     private final List<BookType> bookTypes = new ArrayList<>(Arrays.asList(BookType.values()));
+
+    public Map<Integer, Boolean> getAddedToCart() {
+        return addedToCart;
+    }
+
+    public BookManager() {
+        this.bookList.toPlainList().forEach(el -> this.addedToCart.put(el.getId(), false));
+    }
 
     public List<BookType> getBookTypes() {
         return bookTypes;

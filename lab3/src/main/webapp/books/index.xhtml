@@ -26,6 +26,9 @@
                 <h:form id="booksTable">
                     <h:dataTable styleClass="table" value="#{BookManager.getBookList()}" var="book">
                         <h:column>
+                            <h:selectBooleanCheckbox value="#{BookManager.addedToCart[book.getId()]}" />
+                        </h:column>
+                        <h:column>
                             <f:facet name="header">Title</f:facet>
                             <h:outputText value="#{book.title}"/>
                         </h:column>

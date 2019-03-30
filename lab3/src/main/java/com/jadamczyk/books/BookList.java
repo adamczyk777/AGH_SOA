@@ -2,25 +2,24 @@ package com.jadamczyk.books;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class BookList implements Cloneable {
     public BookList() {
-        this.books.add(new Book("Book 1", "Author 1", BookType.BIOGRAPHY, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 2", "Author 1", BookType.COMEDY, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 3", "Author 1", BookType.COMIC, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 4", "Author 1", BookType.HISTORIC, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 5", "Author 2", BookType.COMIC, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 6", "Author 2", BookType.LITERATURE_OF_FACT, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 7", "Author 3", BookType.SATIRE, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 8", "Author 3", BookType.FANTASY, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 9", "Author 3", BookType.THRILLER, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 10", "Author 3", BookType.HISTORIC, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 11", "Author 4", BookType.BUSINESS, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 12", "Author 4", BookType.HORROR, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 13", "Author 4", BookType.HISTORIC, 12.99, Currency.EUR, 100));
-        this.books.add(new Book("Book 14", "Author 4", BookType.BIOGRAPHY, 12.99, Currency.EUR, 100));
+        this.books.add(new Book(1, "Book 1", "Author 1", BookType.BIOGRAPHY, 16.99, Currency.EUR, 100));
+        this.books.add(new Book(2, "Book 2", "Author 1", BookType.COMEDY, 9.99, Currency.EUR, 100));
+        this.books.add(new Book(3, "Book 3", "Author 1", BookType.COMIC, 2.99, Currency.EUR, 100));
+        this.books.add(new Book(4, "Book 4", "Author 1", BookType.HISTORIC, 3.99, Currency.EUR, 100));
+        this.books.add(new Book(5, "Book 5", "Author 2", BookType.COMIC, 41.99, Currency.EUR, 100));
+        this.books.add(new Book(6, "Book 6", "Author 2", BookType.LITERATURE_OF_FACT, 12.99, Currency.EUR, 100));
+        this.books.add(new Book(7, "Book 7", "Author 3", BookType.SATIRE, 9.99, Currency.EUR, 100));
+        this.books.add(new Book(8, "Book 8", "Author 3", BookType.FANTASY, 2.99, Currency.EUR, 100));
+        this.books.add(new Book(9, "Book 9", "Author 3", BookType.THRILLER, 11.99, Currency.EUR, 100));
+        this.books.add(new Book(10, "Book 10", "Author 3", BookType.HISTORIC, 12.99, Currency.EUR, 100));
+        this.books.add(new Book(11, "Book 11", "Author 4", BookType.BUSINESS, 12.99, Currency.EUR, 100));
+        this.books.add(new Book(12, "Book 12", "Author 4", BookType.HORROR, 19.99, Currency.EUR, 100));
+        this.books.add(new Book(13, "Book 13", "Author 4", BookType.HISTORIC, 29.99, Currency.EUR, 100));
+        this.books.add(new Book(14, "Book 14", "Author 4", BookType.BIOGRAPHY, 39.99, Currency.EUR, 100));
     }
 
     public BookList(BookList old) {
