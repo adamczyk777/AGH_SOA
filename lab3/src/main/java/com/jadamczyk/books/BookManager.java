@@ -2,15 +2,62 @@ package com.jadamczyk.books;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Named("BookManager")
 @ApplicationScoped
 public class BookManager {
+    private String authorFilter = null;
+    private Double priceFromFilter = null;
+    private Double priceToFilter = null;
+    private BookType selectedGenre = null;
     private BookList bookList = new BookList();
+    private final List<BookType> bookTypes = new ArrayList<>(Arrays.asList(BookType.values()));
 
-    public BookList getBookList() {
-        return bookList;
+    public List<BookType> getBookTypes() {
+        return bookTypes;
     }
 
+    public List<Book> getBookList() {
+        return bookList
+                .filterByAuthor(authorFilter)
+                .filterByGenre(selectedGenre)
+                .filterByBottomPrice(priceFromFilter)
+                .filterByTopPrice(priceToFilter)
+                .toPlainList();
+    }
 
+    public String getAuthorFilter() {
+        return authorFilter;
+    }
+
+    public void setAuthorFilter(String authorFilter) {
+        this.authorFilter = authorFilter;
+    }
+
+    public Double getPriceFromFilter() {
+        return priceFromFilter;
+    }
+
+    public void setPriceFromFilter(Double priceFromFilter) {
+        this.priceFromFilter = priceFromFilter;
+    }
+
+    public Double getPriceToFilter() {
+        return priceToFilter;
+    }
+
+    public void setPriceToFilter(Double priceToFilter) {
+        this.priceToFilter = priceToFilter;
+    }
+
+    public BookType getSelectedGenre() {
+        return selectedGenre;
+    }
+
+    public void setSelectedGenre(BookType selectedGenre) {
+        this.selectedGenre = selectedGenre;
+    }
 }
