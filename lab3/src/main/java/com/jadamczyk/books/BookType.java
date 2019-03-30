@@ -1,6 +1,7 @@
 package com.jadamczyk.books;
 
 public enum BookType {
+    _NONE,
     BIOGRAPHY,
     BUSINESS,
     KIDS,

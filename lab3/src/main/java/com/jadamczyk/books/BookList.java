@@ -39,7 +39,7 @@ public class BookList implements Cloneable {
     }
 
     public BookList filterByAuthor(String author) {
-        if (author != null) {
+        if (author != null && !author.equals("")) {
             BookList newObj = this.clone();
             newObj.books = newObj.books.stream().filter(el -> el.getAuthor().equals(author)).collect(Collectors.toList());
             return newObj;
@@ -59,7 +59,7 @@ public class BookList implements Cloneable {
     }
 
     public BookList filterByTopPrice(Double priceTo) {
-        if (priceTo!= null) {
+        if (priceTo != null) {
             BookList newObj = this.clone();
             newObj.books = newObj.books.stream().filter(el -> el.getPrice() <= priceTo).collect(Collectors.toList());
             return newObj;
@@ -69,7 +69,7 @@ public class BookList implements Cloneable {
     }
 
     public BookList filterByGenre(BookType genre) {
-        if (genre != null) {
+        if (genre != null && genre != BookType._NONE) {
             BookList newObj = this.clone();
             newObj.books = newObj.books.stream().filter(el -> el.getType() == genre).collect(Collectors.toList());
             return newObj;

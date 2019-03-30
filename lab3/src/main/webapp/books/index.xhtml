@@ -58,25 +58,25 @@
                         <label for="bottomPrice">Price From:</label>
                         <h:inputText type="number" styleClass="form-control" id="bottomPrice"
                                      value="#{BookManager.priceFromFilter}">
-                            <f:ajax event="blur" render="bookTable"/>
+                            <f:ajax event="change" render="booksTable"/>
                         </h:inputText>
                         <label for="topPrice">Price To:</label>
                         <h:inputText type="number" styleClass="form-control" id="topPrice"
                                      value="#{BookManager.priceToFilter}">
-                            <f:ajax event="blur" render="bookTable"/>
+                            <f:ajax event="change" render="booksTable"/>
                         </h:inputText>
                     </div>
                     <div class="form-group">
                         <label for="author">Author:</label>
                         <h:inputText styleClass="form-control" id="author" value="#{BookManager.authorFilter}">
-                            <f:ajax event="blur" render="bookTable"/>
+                            <f:ajax event="change" render="booksTable"/>
                         </h:inputText>
                     </div>
                     <div class="form-group">
                         <label for="booktype">Genre:</label>
                         <h:selectOneMenu styleClass="form-control" id="booktype" value="#{BookManager.selectedGenre}">
                             <f:selectItems value="#{BookManager.bookTypes}" var="genre" itemLabel="#{genre}" />
-                            <f:ajax event="blur" render="bookTable"/>
+                            <f:ajax event="change" render="booksTable"/>
                         </h:selectOneMenu>
                     </div>
                 </h:form>
