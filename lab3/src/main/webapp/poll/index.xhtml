@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <h:form id="firstForm">
+                <h:form id="firstForm" rendered="#{!FormManager.getSecondStage()}">
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <h:inputText value="#{FormManager.name}" styleClass="form-control" id="name"/>
@@ -43,8 +43,8 @@
                     <div class="form-group">
                         <label for="age">Age:</label>
                         <h:inputText value="#{FormManager.age}" styleClass="form-control" id="age">
-                            <f:validateRequired />
-                            <f:validateLongRange minimum="10" maximum="100" />
+                            <f:validateRequired/>
+                            <f:validateLongRange minimum="10" maximum="100"/>
                         </h:inputText>
                     </div>
                     <div class="form-group">
@@ -65,19 +65,22 @@
                     </div>
                     <div class="form-group">
                         <label for="height">Height:</label>
-                        <h:inputText styleClass="form-control" id="height"/>
+                        <h:inputText styleClass="form-control" id="height">
+                            <f:validateRequired/>
+                            <f:validateLongRange minimum="50" maximum="300"/>
+                        </h:inputText>
                     </div>
-                    <c:if test="#{FormManager.showMale}">
+                    <h:panelGroup rendered="#{FormManager.showMale}">
                         <div class="form-group">
                             <label for="chest">Chest:</label>
                             <h:inputText styleClass="form-control" id="chest"/>
                         </div>
                         <div class="form-group">
-                            <label for="waistMale">Chest:</label>
+                            <label for="waistMale">Waist:</label>
                             <h:inputText styleClass="form-control" id="waistMale"/>
                         </div>
-                    </c:if>
-                    <c:if test="#{FormManager.showFemale}">
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{FormManager.showFemale}">
                         <div class="form-group">
                             <label for="bust">Bust:</label>
                             <h:inputText styleClass="form-control" id="bust"/>
@@ -94,7 +97,54 @@
                             <label for="hips">Hips:</label>
                             <h:inputText styleClass="form-control" id="hips"/>
                         </div>
-                    </c:if>
+                    </h:panelGroup>
+                    <h:button styleClass="btn btn-primary" value="Submit"/>
+                </h:form>
+                <h:form id="secondForm" rendered="#{FormManager.getSecondStage()}">
+                    <div class="form-group">
+                        <h:selectOneRadio styleClass="form-control" id="spending"
+                                          value="#{FormManager.spending}">
+                            <f:selectItems value="#{FormManager.allSpendings}" var="spending"
+                                           itemLabel="#{spending}"/>
+                            <f:ajax event="change" render="secondForm"/>
+                        </h:selectOneRadio>
+                    </div>
+                    <div class="form-group">
+                        <h:selectOneRadio styleClass="form-control" id="frequency"
+                                          value="#{FormManager.frequency}">
+                            <f:selectItems value="#{FormManager.allFrequiencies}" var="frequency"
+                                           itemLabel="#{frequency}"/>
+                            <f:ajax event="change" render="secondForm"/>
+                        </h:selectOneRadio>
+                    </div>
+                    <div class="form-group">
+                        <h:selectManyCheckbox styleClass="form-control" id="colors"
+                                              value="#{FormManager.colors}">
+                            <f:selectItems value="#{FormManager.allColors}" var="color"
+                                           itemLabel="#{color}"/>
+                            <f:ajax event="change" render="firstForm"/>
+                        </h:selectManyCheckbox>
+                    </div>
+                    <h:panelGroup rendered="#{FormManager.showMale}">
+                        <div class="form-group">
+                            <h:selectManyCheckbox styleClass="form-control" id="maleTypes"
+                                                  value="#{FormManager.maleTypes}">
+                                <f:selectItems value="#{FormManager.allMaleClothesTypes}" var="maleClothesType"
+                                               itemLabel="#{maleClothesType}"/>
+                                <f:ajax event="change" render="firstForm"/>
+                            </h:selectManyCheckbox>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{FormManager.showFemale}">
+                        <div class="form-group">
+                            <h:selectManyCheckbox styleClass="form-control" id="femaleTypes"
+                                                  value="#{FormManager.femaleTypes}">
+                                <f:selectItems value="#{FormManager.allFemaleClothesTypes}" var="femaleClothesType"
+                                               itemLabel="#{femaleClothesType}"/>
+                                <f:ajax event="change" render="firstForm"/>
+                            </h:selectManyCheckbox>
+                        </div>
+                    </h:panelGroup>
                 </h:form>
             </div>
             <div class="col-md-3"></div>
