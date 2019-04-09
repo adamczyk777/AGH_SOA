@@ -72,6 +72,7 @@ public class BookList implements Cloneable {
     }
 
     public boolean deleteBook(Book book) {
+        this.books.remove(book);
         return dao.deleteBook(book);
     }
 }
