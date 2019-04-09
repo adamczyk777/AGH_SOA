@@ -6,6 +6,7 @@
 
     <persistence-unit name="AdminPersistenceUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>java:/PostgresDS</jta-data-source>
         <class>com.jadamczyk.books.Book</class>
         <properties>
             <property name="javax.persistence.jdbc.driver_class" value="org.postgresql.Driver" />

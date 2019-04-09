@@ -1,24 +1,17 @@
 package com.jadamczyk.books;
 
-import org.hibernate.Session;
-
 import javax.persistence.*;
-import javax.transaction.Transaction;
 import java.util.LinkedList;
 import java.util.List;
 
 public class BookDAO {
-    private EntityManager em;
-
-    public BookDAO() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
-        this.em = factory.createEntityManager();
-    }
-
     public List<Book> findAll() {
         try {
-            Query q = this.em.createQuery("FROM Book");
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
+            EntityManager em = factory.createEntityManager();
+            Query q = em.createQuery("FROM Book");
             List<Book> result = q.getResultList();
+            em.close();
             return result;
         } catch (Exception e) {
             System.err.println("Blad przy pobueraniu rekord—w: " + e);
@@ -28,14 +21,16 @@ public class BookDAO {
 
     public boolean insertBook(Book book) {
         try {
-            EntityTransaction tr = this.em.getTransaction();
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
+            EntityManager em = factory.createEntityManager();
+            EntityTransaction tr = em.getTransaction();
 
             tr.begin();
             em.persist(book);
             tr.commit();
+            em.close();
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.toString());
             return false;
         }
@@ -43,14 +38,32 @@ public class BookDAO {
 
     public boolean deleteBook(Book book) {
         try {
-            EntityTransaction tr = this.em.getTransaction();
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
+            EntityManager em = factory.createEntityManager();
+            EntityTransaction tr = em.getTransaction();
 
             tr.begin();
             em.remove(book);
             tr.commit();
+            em.close();
             return true;
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            return false;
         }
-        catch (Exception e) {
+    }
+
+    public boolean updateBook(Book book) {
+        try {
+            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
+            EntityManager em = factory.createEntityManager();
+            EntityTransaction tr = em.getTransaction();
+
+            tr.begin();
+            tr.commit();
+            em.close();
+            return true;
+        } catch (Exception e) {
             System.out.println(e.toString());
             return false;
         }

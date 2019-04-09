@@ -18,5 +18,4 @@ dependencies {
     compile group: 'org.glassfish', name: 'javax.faces', version: '2.3.0'
     compile group: 'javax.enterprise', name: 'cdi-api', version: '2.0.SP1'
     compile 'org.hibernate:hibernate-core:5.4.2.Final'
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
 }

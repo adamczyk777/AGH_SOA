@@ -53,4 +53,8 @@ public class BookManager {
     public void setPriceToFilter(Double priceToFilter) {
         this.priceToFilter = priceToFilter;
     }
+
+    public boolean deleteBook(Book book) {
+        return this.bookList.deleteBook(book);
+    }
 }

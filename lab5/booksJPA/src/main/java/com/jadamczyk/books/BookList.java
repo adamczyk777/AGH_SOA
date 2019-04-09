@@ -7,8 +7,10 @@ import java.util.stream.Collectors;
 
 public class BookList implements Cloneable {
     private List<Book> books;
+    private BookDAO dao;
+
     public BookList() {
-        BookDAO dao = new BookDAO();
+        this.dao = new BookDAO();
         this.books = new LinkedList<>(dao.findAll());
     }
 
@@ -67,5 +69,9 @@ public class BookList implements Cloneable {
 
     public List<Book> toPlainList() {
         return books;
+    }
+
+    public boolean deleteBook(Book book) {
+        return dao.deleteBook(book);
     }
 }
