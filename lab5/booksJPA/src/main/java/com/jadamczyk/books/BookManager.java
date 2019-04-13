@@ -1,5 +1,7 @@
 package com.jadamczyk.books;
 
+import com.jadamczyk.books.Entities.Book;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import java.util.*;
@@ -14,7 +16,8 @@ public class BookManager {
     private BookList bookList = new BookList();
 
     public List<Book> getBookList() {
-        return bookList
+        return this.bookList
+                .updateBooks()
                 .filterByAuthorName(authorNameFilter)
                 .filterByAuthorSurname(authorSurnameFilter)
                 .filterByBottomPrice(priceFromFilter)

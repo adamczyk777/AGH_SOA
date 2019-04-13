@@ -7,7 +7,7 @@
     <persistence-unit name="AdminPersistenceUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:/PostgresDS</jta-data-source>
-        <class>com.jadamczyk.books.Book</class>
+        <class>com.jadamczyk.books.Entities.Book</class>
         <properties>
             <property name="javax.persistence.jdbc.driver_class" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
@@ -18,7 +18,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
-            <property name="hbm2ddl.auto" value="create-drop"/>
+            <property name="hbm2ddl.auto" value="update"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -1,17 +1,29 @@
 package com.jadamczyk.books;
 
-import javax.persistence.*;
+import com.jadamczyk.books.Entities.Book;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.LinkedList;
 import java.util.List;
 
 public class BookDAO {
+
+    private EntityManager entityManager;
+
+    public BookDAO() {
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
+        this.entityManager = factory.createEntityManager();
+    }
+
+
+
     public List<Book> findAll() {
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
-            EntityManager em = factory.createEntityManager();
-            Query q = em.createQuery("FROM Book");
+            Query q = entityManager.createQuery("FROM Book");
             List<Book> result = q.getResultList();
-            em.close();
             return result;
         } catch (Exception e) {
             System.err.println("Blad przy pobueraniu rekord—w: " + e);
@@ -19,18 +31,22 @@ public class BookDAO {
         }
     }
 
+    public Book findById(Integer id) {
+        try {
+            return this.entityManager.find(Book.class, id);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public boolean insertBook(Book book) {
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
-            EntityManager em = factory.createEntityManager();
-            EntityTransaction tr = em.getTransaction();
-
-            tr.begin();
-            em.persist(book);
-            tr.commit();
-            em.close();
+            this.entityManager.getTransaction().begin();
+            this.entityManager.persist(book);
+            this.entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
+            this.entityManager.getTransaction().rollback();
             System.out.println(e.toString());
             return false;
         }
@@ -38,16 +54,12 @@ public class BookDAO {
 
     public boolean deleteBook(Book book) {
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
-            EntityManager em = factory.createEntityManager();
-            EntityTransaction tr = em.getTransaction();
-
-            tr.begin();
-            em.remove(book);
-            tr.commit();
-            em.close();
+            this.entityManager.getTransaction().begin();
+            this.entityManager.remove(book);
+            this.entityManager.getTransaction().commit();
             return true;
         } catch (Exception e) {
+            this.entityManager.getTransaction().rollback();
             System.out.println(e.toString());
             return false;
         }
@@ -55,15 +67,13 @@ public class BookDAO {
 
     public boolean updateBook(Book book) {
         try {
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("AdminPersistenceUnit");
-            EntityManager em = factory.createEntityManager();
-            EntityTransaction tr = em.getTransaction();
+            this.entityManager.getTransaction().begin();
+            this.entityManager.merge(book);
+            this.entityManager.getTransaction().commit();
 
-            tr.begin();
-            tr.commit();
-            em.close();
             return true;
         } catch (Exception e) {
+            this.entityManager.getTransaction().rollback();
             System.out.println(e.toString());
             return false;
         }

@@ -1,6 +1,7 @@
 package com.jadamczyk.books;
 
-import java.util.ArrayList;
+import com.jadamczyk.books.Entities.Book;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +17,11 @@ public class BookList implements Cloneable {
 
     public BookList(BookList old) {
         this.books = new LinkedList<>(old.books);
+    }
+
+    public BookList updateBooks() {
+        this.books = this.dao.findAll();
+        return this;
     }
 
     public void setBooks(List<Book> books) {

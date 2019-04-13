@@ -1,5 +1,7 @@
 package com.jadamczyk.books;
 
+import com.jadamczyk.books.Entities.Book;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
@@ -15,13 +17,17 @@ public class CreateUpdateBookManager {
     private Book bookToUpdate = null;
     private BookDAO dao = new BookDAO();
 
-    public void populateBookData() {
+    public String populateBookData(Book book) {
+        this.bookToUpdate = book;
+
         this.name = this.bookToUpdate.getName();
         this.surname= this.bookToUpdate.getSurname();
         this.title = this.bookToUpdate.getTitle();
         this.price= this.bookToUpdate.getPrice();
         this.year = this.bookToUpdate.getPublishYear();
         this.isbn = this.bookToUpdate.getIsbn();
+
+        return "newBook/newBook.xhtml";
     }
 
     public Book getBookToUpdate() {
@@ -98,10 +104,21 @@ public class CreateUpdateBookManager {
     public String submit() {
         if (this.bookToUpdate != null) {
             this.updateBook();
+
         } else {
             this.saveBook();
         }
         this.bookToUpdate = null;
-        return "index.xhtml";
+        this.clearFields();
+        return "../index.xhtml";
+    }
+
+    private void clearFields() {
+        this.name = null;
+        this.surname= null;
+        this.title = null;
+        this.price= null;
+        this.year = null;
+        this.isbn = null;
     }
 }

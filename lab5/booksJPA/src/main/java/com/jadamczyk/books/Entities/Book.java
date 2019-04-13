@@ -1,4 +1,4 @@
-package com.jadamczyk.books;
+package com.jadamczyk.books.Entities;
 
 import javax.persistence.*;
 
@@ -6,9 +6,9 @@ import javax.persistence.*;
 @Table(name = "books")
 public class Book {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name = "surname")
@@ -22,7 +22,7 @@ public class Book {
     @Column(name = "published")
     private Integer publishYear;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -54,7 +54,7 @@ public class Book {
         this.title = title;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 

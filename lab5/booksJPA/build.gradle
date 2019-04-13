@@ -18,4 +18,7 @@ dependencies {
     compile group: 'org.glassfish', name: 'javax.faces', version: '2.3.0'
     compile group: 'javax.enterprise', name: 'cdi-api', version: '2.0.SP1'
     compile 'org.hibernate:hibernate-core:5.4.2.Final'
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
+    compile group: 'javax.json', name: 'javax.json-api', version: '1.1.4'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
