@@ -10,7 +10,7 @@ public class Book {
     @Column(name = "id")
     private Integer id;
     @ManyToOne
-    @Column(name = "author_id")
+    @JoinColumn(name = "author_id")
     private Author author;
     @Column(name = "title", unique = true)
     private String title;

@@ -1,5 +1,6 @@
 package com.jadamczyk.books;
 
+import com.jadamczyk.books.DAO.BookDAO;
 import com.jadamczyk.books.Entities.Book;
 
 import java.util.LinkedList;
@@ -79,6 +80,6 @@ public class BookList implements Cloneable {
 
     public boolean deleteBook(Book book) {
         this.books.remove(book);
-        return dao.deleteBook(book);
+        return dao.delete(book);
     }
 }

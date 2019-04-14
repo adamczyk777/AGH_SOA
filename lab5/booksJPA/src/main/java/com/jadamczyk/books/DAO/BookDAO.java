@@ -1,4 +1,4 @@
-package com.jadamczyk.books;
+package com.jadamczyk.books.DAO;
 
 import com.jadamczyk.books.Entities.Book;
 
@@ -9,8 +9,7 @@ import javax.persistence.Query;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BookDAO {
-
+public class BookDAO implements DAO<Book> {
     private EntityManager entityManager;
 
     public BookDAO() {
@@ -18,8 +17,7 @@ public class BookDAO {
         this.entityManager = factory.createEntityManager();
     }
 
-
-
+    @Override
     public List<Book> findAll() {
         try {
             Query q = entityManager.createQuery("FROM Book");
@@ -31,6 +29,7 @@ public class BookDAO {
         }
     }
 
+    @Override
     public Book findById(Integer id) {
         try {
             return this.entityManager.find(Book.class, id);
@@ -39,43 +38,46 @@ public class BookDAO {
         }
     }
 
-    public boolean insertBook(Book book) {
+    @Override
+    public Book insert(Book book) {
         try {
             this.entityManager.getTransaction().begin();
             this.entityManager.persist(book);
             this.entityManager.getTransaction().commit();
-            return true;
+            return book;
         } catch (Exception e) {
             this.entityManager.getTransaction().rollback();
             System.out.println(e.toString());
-            return false;
+            return null;
         }
     }
 
-    public boolean deleteBook(Book book) {
+    @Override
+    public Book delete(Book book) {
         try {
             this.entityManager.getTransaction().begin();
             this.entityManager.remove(book);
             this.entityManager.getTransaction().commit();
-            return true;
+            return book;
         } catch (Exception e) {
             this.entityManager.getTransaction().rollback();
             System.out.println(e.toString());
-            return false;
+            return null;
         }
     }
 
-    public boolean updateBook(Book book) {
+    @Override
+    public Book update(Book book) {
         try {
             this.entityManager.getTransaction().begin();
             this.entityManager.merge(book);
             this.entityManager.getTransaction().commit();
 
-            return true;
+            return book;
         } catch (Exception e) {
             this.entityManager.getTransaction().rollback();
             System.out.println(e.toString());
-            return false;
+            return null;
         }
     }
 }

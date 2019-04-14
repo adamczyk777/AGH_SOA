@@ -1,5 +1,6 @@
 package com.jadamczyk.books;
 
+import com.jadamczyk.books.DAO.BookDAO;
 import com.jadamczyk.books.Entities.Book;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -92,11 +93,11 @@ public class CreateUpdateBookManager {
         newBook.setPrice(this.price);
         newBook.setPublishYear(this.year);
         newBook.setTitle(this.title);
-        this.dao.insertBook(newBook);
+        this.dao.insert(newBook);
     }
 
     public void updateBook() {
-        this.dao.updateBook(this.bookToUpdate);
+        this.dao.update(this.bookToUpdate);
     }
 
     public String submit() {

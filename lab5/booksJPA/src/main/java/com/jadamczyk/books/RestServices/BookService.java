@@ -1,6 +1,6 @@
 package com.jadamczyk.books.RestServices;
 
-import com.jadamczyk.books.BookDAO;
+import com.jadamczyk.books.DAO.BookDAO;
 import com.jadamczyk.books.Entities.Book;
 
 import javax.ws.rs.*;
@@ -26,7 +26,7 @@ public class BookService {
     public Response deleteBook(@QueryParam("id") Integer id) {
         try {
             Book toDelete = bookDAO.findById(id);
-            bookDAO.deleteBook(toDelete);
+            bookDAO.delete(toDelete);
             return Response
                     .ok()
                     .entity(toDelete)
@@ -50,7 +50,7 @@ public class BookService {
             newBook.setTitle(payload.getTitle());
             newBook.setPrice(payload.getPrice());
             newBook.setPublishYear(payload.getPublishYear());
-            bookDAO.insertBook(newBook);
+            bookDAO.insert(newBook);
 
             return Response.ok().entity(newBook).build();
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class BookService {
             if (payload.getIsbn() != null) bookToUpdate.setIsbn(payload.getIsbn());
             if (payload.getPublishYear() != null) bookToUpdate.setPublishYear(payload.getPublishYear());
 
-            bookDAO.updateBook(bookToUpdate);
+            bookDAO.update(bookToUpdate);
 
             return Response.ok().entity(bookToUpdate).build();
         } catch (Exception e) {

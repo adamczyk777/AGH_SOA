@@ -10,10 +10,10 @@ public class Rental {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @Column(name = "reader_id")
+    @JoinColumn(name = "reader_id")
     private Reader reader;
-    @OneToOne
-    @Column(name = "book_id")
+    @ManyToOne
+    @JoinColumn(name = "book_id")
     private Book book;
     @Column(name = "rent_date")
     private Date rentDate;
