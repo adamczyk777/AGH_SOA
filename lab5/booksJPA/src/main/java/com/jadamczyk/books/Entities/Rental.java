@@ -20,7 +20,7 @@ public class Rental {
     @Column(name = "return_date")
     private Date returnDate;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

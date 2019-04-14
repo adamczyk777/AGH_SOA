@@ -60,7 +60,7 @@ public class BookService {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response updateBook(Book payload) {
         try {
-            if (payload.getId() == null) return Response.status(Response.Status.BAD_REQUEST).build();
+//            if (payload.getId()) return Response.status(Response.Status.BAD_REQUEST).build();
 
             Book bookToUpdate = bookDAO.findById(payload.getId());
 

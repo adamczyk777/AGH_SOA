@@ -11,7 +11,7 @@ public class Author {
     private String name;
     private String surname;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
