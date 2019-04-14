@@ -14,12 +14,6 @@ public class Book {
     private Author author;
     @Column(name = "title", unique = true)
     private String title;
-    @Column(name = "price")
-    private Double price;
-    @Column(name = "isbn")
-    private String isbn;
-    @Column(name = "published")
-    private Integer publishYear;
 
     public Integer getId() {
         return id;
@@ -39,29 +33,5 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public Integer getPublishYear() {
-        return publishYear;
-    }
-
-    public void setPublishYear(Integer publishYear) {
-        this.publishYear = publishYear;
     }
 }

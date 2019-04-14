@@ -45,11 +45,8 @@ public class BookService {
         try {
             Book newBook = new Book();
 
-            newBook.setIsbn(payload.getIsbn());
             newBook.setAuthor(payload.getAuthor());
             newBook.setTitle(payload.getTitle());
-            newBook.setPrice(payload.getPrice());
-            newBook.setPublishYear(payload.getPublishYear());
             bookDAO.insert(newBook);
 
             return Response.ok().entity(newBook).build();
@@ -69,9 +66,6 @@ public class BookService {
 
             if (payload.getAuthor() != null) bookToUpdate.setAuthor(payload.getAuthor());
             if (payload.getTitle() != null) bookToUpdate.setTitle(payload.getTitle());
-            if (payload.getPrice() != null) bookToUpdate.setPrice(payload.getPrice());
-            if (payload.getIsbn() != null) bookToUpdate.setIsbn(payload.getIsbn());
-            if (payload.getPublishYear() != null) bookToUpdate.setPublishYear(payload.getPublishYear());
 
             bookDAO.update(bookToUpdate);
 

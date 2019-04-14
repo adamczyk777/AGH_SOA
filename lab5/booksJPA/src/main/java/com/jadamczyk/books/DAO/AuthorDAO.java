@@ -18,7 +18,8 @@ public class AuthorDAO implements DAO<Author> {
     @Override
     public List<Author> findAll() {
         try {
-
+            this.entityManager.getTransaction().begin();
+            
         } catch (Exception e) {
 
         }
