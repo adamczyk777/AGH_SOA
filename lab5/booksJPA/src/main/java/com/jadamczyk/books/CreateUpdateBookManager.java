@@ -20,8 +20,8 @@ public class CreateUpdateBookManager {
     public String populateBookData(Book book) {
         this.bookToUpdate = book;
 
-        this.name = this.bookToUpdate.getName();
-        this.surname= this.bookToUpdate.getSurname();
+        this.name = this.bookToUpdate.getAuthor().getName();
+        this.surname= this.bookToUpdate.getAuthor().getSurname();
         this.title = this.bookToUpdate.getTitle();
         this.price= this.bookToUpdate.getPrice();
         this.year = this.bookToUpdate.getPublishYear();
@@ -89,8 +89,6 @@ public class CreateUpdateBookManager {
     public void saveBook() {
         Book newBook = new Book();
         newBook.setIsbn(this.isbn);
-        newBook.setName(this.name);
-        newBook.setSurname(this.surname);
         newBook.setPrice(this.price);
         newBook.setPublishYear(this.year);
         newBook.setTitle(this.title);

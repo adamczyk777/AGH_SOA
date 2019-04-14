@@ -46,8 +46,7 @@ public class BookService {
             Book newBook = new Book();
 
             newBook.setIsbn(payload.getIsbn());
-            newBook.setName(payload.getName());
-            newBook.setSurname(payload.getSurname());
+            newBook.setAuthor(payload.getAuthor());
             newBook.setTitle(payload.getTitle());
             newBook.setPrice(payload.getPrice());
             newBook.setPublishYear(payload.getPublishYear());
@@ -68,8 +67,7 @@ public class BookService {
 
             Book bookToUpdate = bookDAO.findById(payload.getId());
 
-            if (payload.getName() != null) bookToUpdate.setName(payload.getName());
-            if (payload.getSurname() != null) bookToUpdate.setSurname(payload.getSurname());
+            if (payload.getAuthor() != null) bookToUpdate.setAuthor(payload.getAuthor());
             if (payload.getTitle() != null) bookToUpdate.setTitle(payload.getTitle());
             if (payload.getPrice() != null) bookToUpdate.setPrice(payload.getPrice());
             if (payload.getIsbn() != null) bookToUpdate.setIsbn(payload.getIsbn());

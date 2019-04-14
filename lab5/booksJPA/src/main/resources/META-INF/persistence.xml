@@ -8,6 +8,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:/PostgresDS</jta-data-source>
         <class>com.jadamczyk.books.Entities.Book</class>
+        <class>com.jadamczyk.books.Entities.Rental</class>
+        <class>com.jadamczyk.books.Entities.Reader</class>
+        <class>com.jadamczyk.books.Entities.Author</class>
         <properties>
             <property name="javax.persistence.jdbc.driver_class" value="org.postgresql.Driver" />
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

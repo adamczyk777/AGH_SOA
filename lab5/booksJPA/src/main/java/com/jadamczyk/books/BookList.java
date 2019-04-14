@@ -36,7 +36,7 @@ public class BookList implements Cloneable {
     public BookList filterByAuthorName(String authorName) {
         if (authorName != null && !authorName.equals("")) {
             BookList newObj = this.clone();
-            newObj.books = newObj.books.stream().filter(el -> el.getName().equals(authorName)).collect(Collectors.toList());
+            newObj.books = newObj.books.stream().filter(el -> el.getAuthor().getName().equals(authorName)).collect(Collectors.toList());
             return newObj;
         } else {
             return this;
@@ -46,7 +46,7 @@ public class BookList implements Cloneable {
     public BookList filterByAuthorSurname(String authorSurname) {
         if (authorSurname != null && !authorSurname.equals("")) {
             BookList newObj = this.clone();
-            newObj.books = newObj.books.stream().filter(el -> el.getSurname().equals(authorSurname)).collect(Collectors.toList());
+            newObj.books = newObj.books.stream().filter(el -> el.getAuthor().getSurname().equals(authorSurname)).collect(Collectors.toList());
             return newObj;
         } else {
             return this;

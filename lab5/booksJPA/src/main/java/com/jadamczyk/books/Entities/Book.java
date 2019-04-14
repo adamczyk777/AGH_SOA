@@ -9,10 +9,9 @@ public class Book {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "surname")
-    private String surname;
+    @ManyToOne
+    @Column(name = "author_id")
+    private Author author;
     @Column(name = "title", unique = true)
     private String title;
     @Column(name = "price")
@@ -26,24 +25,12 @@ public class Book {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Author getAuthor() {
+        return author;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getTitle() {
