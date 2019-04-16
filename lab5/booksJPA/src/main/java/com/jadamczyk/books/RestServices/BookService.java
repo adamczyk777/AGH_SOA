@@ -1,6 +1,8 @@
 package com.jadamczyk.books.RestServices;
 
+import com.jadamczyk.books.DAO.AuthorDAO;
 import com.jadamczyk.books.DAO.BookDAO;
+import com.jadamczyk.books.Entities.Author;
 import com.jadamczyk.books.Entities.Book;
 
 import javax.ws.rs.*;
@@ -22,10 +24,18 @@ public class BookService {
     }
 
     @GET
-    @Path("{id}")
+    @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getBook(@PathParam("id") Integer id) {
         return Response.ok().entity(bookDAO.findById(id)).build();
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getBooksByAuthor(@QueryParam("authorId") Integer id) {
+        AuthorDAO authorDAO = new AuthorDAO();
+        Author author = authorDAO.findById(id);
+        return Response.ok().entity(bookDAO.findByAuthor(author)).build();
     }
 
     @GET

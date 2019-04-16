@@ -1,6 +1,8 @@
 package com.jadamczyk.books.RestServices;
 
+import com.jadamczyk.books.DAO.AuthorDAO;
 import com.jadamczyk.books.DAO.RentalDAO;
+import com.jadamczyk.books.Entities.Author;
 import com.jadamczyk.books.Entities.Rental;
 
 import javax.ws.rs.*;
@@ -15,15 +17,61 @@ public class RentalService {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getBooks() {
+    public Response getRentals() {
         List<Rental> authors = rentalDAO.findAll();
 
         return Response.ok().entity(authors).build();
     }
 
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getRental(@PathParam("id") Integer id) {
+        try {
+            return Response.ok().entity(rentalDAO.findById(id)).build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getRentalByAuthor(@QueryParam("authorId") Integer id) {
+        try {
+            List<Rental> rentals = rentalDAO.findByAuthor(id);
+
+            return Response
+                    .ok()
+                    .entity(rentals)
+                    .build();
+        } catch (Exception e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .build();
+        }
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getRentalByBook(@QueryParam("bookId") Integer id) {
+        try {
+            List<Rental> rentals = rentalDAO.findByBook(id);
+
+            return Response
+                    .ok()
+                    .entity(rentals)
+                    .build();
+        } catch (Exception e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .build();
+        }
+    }
+
+
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
-    public Response deleteBook(@QueryParam("id") Integer id) {
+    public Response deleteRental(@QueryParam("id") Integer id) {
         try {
             Rental toDelete = rentalDAO.findById(id);
             rentalDAO.delete(toDelete);
@@ -41,7 +89,7 @@ public class RentalService {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response insertBook(Rental payload) {
+    public Response insertRental(Rental payload) {
         try {
             Rental newRental = new Rental();
 
@@ -60,7 +108,7 @@ public class RentalService {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateBook(Rental payload) {
+    public Response updateRental(Rental payload) {
         try {
             if (payload.getId() == null) return Response.status(Response.Status.BAD_REQUEST).build();
 
