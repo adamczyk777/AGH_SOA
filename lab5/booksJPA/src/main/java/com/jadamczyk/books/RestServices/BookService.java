@@ -21,6 +21,20 @@ public class BookService {
         return Response.ok().entity(books).build();
     }
 
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getBook(@PathParam("id") Integer id) {
+        return Response.ok().entity(bookDAO.findById(id)).build();
+    }
+
+    @GET
+    @Path("{id}/rentals")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getBookRentals(@PathParam("id") Integer id) {
+        return Response.ok().entity(bookDAO.findById(id).getRentals()).build();
+    }
+
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
     public Response deleteBook(@QueryParam("id") Integer id) {

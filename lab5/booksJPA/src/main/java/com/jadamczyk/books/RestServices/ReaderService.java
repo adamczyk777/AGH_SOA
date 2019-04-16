@@ -1,11 +1,15 @@
 package com.jadamczyk.books.RestServices;
 
 import com.jadamczyk.books.DAO.ReaderDAO;
+import com.jadamczyk.books.Entities.Author;
+import com.jadamczyk.books.Entities.Book;
 import com.jadamczyk.books.Entities.Reader;
+import com.jadamczyk.books.Entities.Rental;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.LinkedList;
 import java.util.List;
 
 @Path("/reader")
@@ -35,6 +39,21 @@ public class ReaderService {
                     .status(Response.Status.NOT_FOUND)
                     .build();
         }
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getBook(@PathParam("id") Integer id) {
+        Reader reader = readerDAO.findById(id);
+        return Response.ok().entity(reader).build();
+    }
+
+    @GET
+    @Path("{id}/rentals")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getReaderRentals(@PathParam("id") Integer id) {
+        return Response.ok().entity(readerDAO.findById(id).getRentals()).build();
     }
 
     @POST

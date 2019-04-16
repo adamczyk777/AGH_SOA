@@ -2,10 +2,13 @@ package com.jadamczyk.books.RestServices;
 
 import com.jadamczyk.books.DAO.AuthorDAO;
 import com.jadamczyk.books.Entities.Author;
+import com.jadamczyk.books.Entities.Book;
+import com.jadamczyk.books.Entities.Rental;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.LinkedList;
 import java.util.List;
 
 @Path("/author")
@@ -18,6 +21,33 @@ public class AuthorService {
         List<Author> authors = authorDAO.findAll();
 
         return Response.ok().entity(authors).build();
+    }
+
+    @GET
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getBook(@PathParam("id") Integer id) {
+        Author author = authorDAO.findById(id);
+        return Response.ok().entity(author).build();
+    }
+
+    @GET
+    @Path("{id}/books")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAuthorBooks(@PathParam("id") Integer id) {
+        Author author = authorDAO.findById(id);
+        return Response.ok().entity(author.getBooks()).build();
+    }
+
+    @GET
+    @Path("{id}/rentals")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAuthorRentals(@PathParam("id") Integer id) {
+        Author author = authorDAO.findById(id);
+        List<Rental> rentals = new LinkedList<>();
+        List<Book> books = author.getBooks();
+        books.stream().forEach(book -> rentals.addAll(book.getRentals()));
+        return Response.ok().entity(rentals).build();
     }
 
     @DELETE
@@ -36,6 +66,7 @@ public class AuthorService {
                     .build();
         }
     }
+
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
