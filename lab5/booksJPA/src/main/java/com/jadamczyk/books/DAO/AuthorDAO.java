@@ -20,7 +20,7 @@ public class AuthorDAO implements DAO<Author> {
     @Override
     public List<Author> findAll() {
         try {
-            Query q = entityManager.createQuery("FROM Author");
+            Query q = entityManager.createQuery("SELECT a FROM Author a");
             List<Author> result = q.getResultList();
             return result;
         } catch (Exception e) {

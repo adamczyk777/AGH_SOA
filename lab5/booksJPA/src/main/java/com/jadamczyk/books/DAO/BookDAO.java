@@ -20,7 +20,7 @@ public class BookDAO implements DAO<Book> {
     @Override
     public List<Book> findAll() {
         try {
-            Query q = entityManager.createQuery("FROM Book");
+            Query q = entityManager.createQuery("SELECT b FROM Book b");
             List<Book> result = q.getResultList();
             return result;
         } catch (Exception e) {

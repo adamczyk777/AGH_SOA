@@ -19,7 +19,7 @@ public class RentalDAO implements DAO<Rental> {
     @Override
     public List<Rental> findAll() {
         try {
-            Query q = entityManager.createQuery("FROM Rental");
+            Query q = entityManager.createQuery("SELECT a FROM Rental a");
             List<Rental> result = q.getResultList();
             return result;
         } catch (Exception e) {

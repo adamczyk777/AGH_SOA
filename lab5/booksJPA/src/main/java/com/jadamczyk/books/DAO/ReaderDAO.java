@@ -1,14 +1,11 @@
 package com.jadamczyk.books.DAO;
 
 import com.jadamczyk.books.Entities.Reader;
-import com.jadamczyk.books.Enums.ReadersOrder;
-import com.jadamczyk.books.Enums.ReadersQuantity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.ws.rs.QueryParam;
 import java.util.List;
 
 public class ReaderDAO implements DAO<Reader> {
@@ -22,7 +19,7 @@ public class ReaderDAO implements DAO<Reader> {
     @Override
     public List<Reader> findAll() {
         try {
-            Query q = entityManager.createQuery("FROM Reader");
+            Query q = entityManager.createQuery("SELECT r FROM Reader r LEFT JOIN FETCH r.rentals");
             List<Reader> result = q.getResultList();
             return result;
         } catch (Exception e) {
@@ -32,13 +29,13 @@ public class ReaderDAO implements DAO<Reader> {
         }
     }
 
-    public List<Reader> findWithOrders(ReadersQuantity quantity) {
-        try {
-
-        } catch (Exception e) {
-
-        }
-    }
+//    public List<Reader> findWithOrders(ReadersQuantity quantity) {
+//        try {
+//
+//        } catch (Exception e) {
+//
+//        }
+//    }
 
     @Override
     public Reader findById(Integer id) {

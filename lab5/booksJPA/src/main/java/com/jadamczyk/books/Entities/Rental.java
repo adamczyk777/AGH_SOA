@@ -1,5 +1,7 @@
 package com.jadamczyk.books.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -9,9 +11,11 @@ public class Rental {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "reader_id")
     private Reader reader;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;

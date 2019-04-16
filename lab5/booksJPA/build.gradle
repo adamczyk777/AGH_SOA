@@ -20,5 +20,6 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.4.2.Final'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
     compile group: 'javax.json', name: 'javax.json-api', version: '1.1.4'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    compile 'javax.json.bind:javax.json.bind-api:1.0'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.5.4'
 }

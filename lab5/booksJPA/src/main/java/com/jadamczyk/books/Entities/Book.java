@@ -1,6 +1,10 @@
 package com.jadamczyk.books.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -14,6 +18,10 @@ public class Book {
     private Author author;
     @Column(name = "title", unique = true)
     private String title;
+    @JsonBackReference
+    @OneToMany(mappedBy = "book")
+    private List<Rental> rentals;
+
 
     public Integer getId() {
         return id;
@@ -33,5 +41,9 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
     }
 }
