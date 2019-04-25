@@ -12,11 +12,6 @@
         <class>com.jadamczyk.books.Entities.Reader</class>
         <class>com.jadamczyk.books.Entities.Author</class>
         <properties>
-            <property name="javax.persistence.jdbc.driver_class" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/admin"/>
-            <property name="hibernate.connection.username" value="admin"/>
-            <property name="hibernate.connection.password" value="admin"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
