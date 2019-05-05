@@ -4,6 +4,7 @@ import com.jadamczyk.books.DAO.AuthorDAO;
 import com.jadamczyk.books.DAO.BookDAO;
 import com.jadamczyk.books.Entities.Author;
 import com.jadamczyk.books.Entities.Book;
+import com.jadamczyk.books.JSON.PlainBook;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -65,7 +66,7 @@ public class BookService {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response insertBook(Book payload) {
+    public Response insertBook(PlainBook payload) {
         try {
             Book newBook = new Book();
 
@@ -82,7 +83,7 @@ public class BookService {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateBook(Book payload) {
+    public Response updateBook(PlainBook payload) {
         try {
 //            if (payload.getId()) return Response.status(Response.Status.BAD_REQUEST).build();
 

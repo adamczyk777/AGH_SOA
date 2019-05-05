@@ -38,6 +38,10 @@ public class Author {
         this.surname = surname;
     }
 
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
     @JsonbTransient
     public List getBooks() {
         return books;

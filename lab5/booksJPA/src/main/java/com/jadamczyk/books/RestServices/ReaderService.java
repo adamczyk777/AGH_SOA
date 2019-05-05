@@ -5,6 +5,7 @@ import com.jadamczyk.books.Entities.Author;
 import com.jadamczyk.books.Entities.Book;
 import com.jadamczyk.books.Entities.Reader;
 import com.jadamczyk.books.Entities.Rental;
+import com.jadamczyk.books.JSON.PlainReader;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -59,7 +60,7 @@ public class ReaderService {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response insertBook(Reader payload) {
+    public Response insertBook(PlainReader payload) {
         try {
             Reader newReader = new Reader();
 
@@ -76,7 +77,7 @@ public class ReaderService {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateBook(Reader payload) {
+    public Response updateBook(PlainReader payload) {
         try {
             if (payload.getId() == null) return Response.status(Response.Status.BAD_REQUEST).build();
 

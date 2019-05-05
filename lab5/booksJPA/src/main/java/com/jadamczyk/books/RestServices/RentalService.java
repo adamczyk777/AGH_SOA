@@ -4,6 +4,7 @@ import com.jadamczyk.books.DAO.AuthorDAO;
 import com.jadamczyk.books.DAO.RentalDAO;
 import com.jadamczyk.books.Entities.Author;
 import com.jadamczyk.books.Entities.Rental;
+import com.jadamczyk.books.JSON.PlainRental;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -89,7 +90,7 @@ public class RentalService {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response insertRental(Rental payload) {
+    public Response insertRental(PlainRental payload) {
         try {
             Rental newRental = new Rental();
 
@@ -108,7 +109,7 @@ public class RentalService {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateRental(Rental payload) {
+    public Response updateRental(PlainRental payload) {
         try {
             if (payload.getId() == null) return Response.status(Response.Status.BAD_REQUEST).build();
 
