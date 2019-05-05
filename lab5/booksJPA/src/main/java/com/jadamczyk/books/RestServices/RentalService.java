@@ -1,8 +1,8 @@
 package com.jadamczyk.books.RestServices;
 
-import com.jadamczyk.books.DAO.AuthorDAO;
+import com.jadamczyk.books.DAO.BookDAO;
+import com.jadamczyk.books.DAO.ReaderDAO;
 import com.jadamczyk.books.DAO.RentalDAO;
-import com.jadamczyk.books.Entities.Author;
 import com.jadamczyk.books.Entities.Rental;
 import com.jadamczyk.books.JSON.PlainRental;
 
@@ -13,6 +13,8 @@ import java.util.List;
 
 @Path("/rental")
 public class RentalService {
+    private BookDAO bookDAO= new BookDAO();
+    private ReaderDAO readerDAO = new ReaderDAO();
 
     private RentalDAO rentalDAO = new RentalDAO();
 
@@ -94,8 +96,8 @@ public class RentalService {
         try {
             Rental newRental = new Rental();
 
-            newRental.setReader(payload.getReader());
-            newRental.setBook(payload.getBook());
+            newRental.setReader(readerDAO.findById(payload.getReaderId()));
+            newRental.setBook(bookDAO.findById(payload.getBookId()));
             newRental.setRentDate(payload.getRentDate());
             newRental.setReturnDate(payload.getReturnDate());
             rentalDAO.insert(newRental);
@@ -115,8 +117,8 @@ public class RentalService {
 
             Rental rentalToUpdate = rentalDAO.findById(payload.getId());
 
-            if (payload.getBook() != null) rentalToUpdate.setBook(payload.getBook());
-            if (payload.getReader() != null) rentalToUpdate.setReader(payload.getReader());
+            if (payload.getBookId() != null) rentalToUpdate.setBook(bookDAO.findById(payload.getBookId()));
+            if (payload.getReaderId() != null) rentalToUpdate.setReader(readerDAO.findById(payload.getReaderId()));
             if (payload.getRentDate() != null) rentalToUpdate.setRentDate(payload.getRentDate());
             if (payload.getReturnDate() != null) rentalToUpdate.setReturnDate(payload.getReturnDate());
 

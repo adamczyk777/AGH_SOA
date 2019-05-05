@@ -15,6 +15,7 @@ import java.util.List;
 public class BookService {
 
     private BookDAO bookDAO = new BookDAO();
+    private AuthorDAO authorDAO = new AuthorDAO();
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -70,7 +71,7 @@ public class BookService {
         try {
             Book newBook = new Book();
 
-            newBook.setAuthor(payload.getAuthor());
+            newBook.setAuthor(authorDAO.findById(payload.getAuthorId()));
             newBook.setTitle(payload.getTitle());
             bookDAO.insert(newBook);
 
@@ -89,7 +90,7 @@ public class BookService {
 
             Book bookToUpdate = bookDAO.findById(payload.getId());
 
-            if (payload.getAuthor() != null) bookToUpdate.setAuthor(payload.getAuthor());
+            if (payload.getAuthorId() != null) bookToUpdate.setAuthor(authorDAO.findById(payload.getAuthorId()));
             if (payload.getTitle() != null) bookToUpdate.setTitle(payload.getTitle());
 
             bookDAO.update(bookToUpdate);

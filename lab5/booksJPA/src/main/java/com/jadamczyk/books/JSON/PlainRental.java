@@ -7,8 +7,8 @@ import java.util.Date;
 
 public class PlainRental {
     private Integer id;
-    private Reader reader;
-    private Book book;
+    private Integer readerId;
+    private Integer bookId;
     private Date rentDate;
     private Date returnDate;
 
@@ -16,12 +16,12 @@ public class PlainRental {
         return id;
     }
 
-    public Reader getReader() {
-        return reader;
+    public Integer getReaderId() {
+        return readerId;
     }
 
-    public Book getBook() {
-        return book;
+    public Integer getBookId() {
+        return bookId;
     }
 
     public Date getRentDate() {
