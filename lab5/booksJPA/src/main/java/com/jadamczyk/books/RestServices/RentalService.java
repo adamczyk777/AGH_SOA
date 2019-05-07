@@ -4,6 +4,7 @@ import com.jadamczyk.books.DAO.BookDAO;
 import com.jadamczyk.books.DAO.ReaderDAO;
 import com.jadamczyk.books.DAO.RentalDAO;
 import com.jadamczyk.books.Entities.Rental;
+import com.jadamczyk.books.JMS.AuthorRentalQueueManager;
 import com.jadamczyk.books.JSON.PlainRental;
 
 import javax.ws.rs.*;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Path("/rental")
 public class RentalService {
-    private BookDAO bookDAO= new BookDAO();
+    private BookDAO bookDAO = new BookDAO();
     private ReaderDAO readerDAO = new ReaderDAO();
 
     private RentalDAO rentalDAO = new RentalDAO();
@@ -101,6 +102,9 @@ public class RentalService {
             newRental.setRentDate(payload.getRentDate());
             newRental.setReturnDate(payload.getReturnDate());
             rentalDAO.insert(newRental);
+
+            AuthorRentalQueueManager arqm = new AuthorRentalQueueManager();
+            arqm.sendMessage(String.format("Rented book: %s by author: %s", newRental.getBook().getTitle(), newRental.getBook().getAuthor().getName() + " " + newRental.getBook().getAuthor().getSurname()));
 
             return Response.ok().entity(newRental).build();
         } catch (Exception e) {
