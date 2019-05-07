@@ -1,7 +1,6 @@
 package com.jadamczyk.books.DAO;
 
 import com.jadamczyk.books.Entities.Author;
-import com.jadamczyk.books.Entities.Author;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -1,8 +1,5 @@
 package com.jadamczyk.books.JSON;
 
-import com.jadamczyk.books.Entities.Book;
-import com.jadamczyk.books.Entities.Reader;
-
 import java.util.Date;
 
 public class PlainRental {
