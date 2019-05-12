@@ -14,9 +14,9 @@ import java.util.List;
 
 @Path("/rental")
 public class RentalService {
+    private AuthorRentalQueueManager queueManager = new AuthorRentalQueueManager();
     private BookDAO bookDAO = new BookDAO();
     private ReaderDAO readerDAO = new ReaderDAO();
-
     private RentalDAO rentalDAO = new RentalDAO();
 
     @GET
@@ -96,15 +96,14 @@ public class RentalService {
     public Response insertRental(PlainRental payload) {
         try {
             Rental newRental = new Rental();
-
             newRental.setReader(readerDAO.findById(payload.getReaderId()));
             newRental.setBook(bookDAO.findById(payload.getBookId()));
             newRental.setRentDate(payload.getRentDate());
             newRental.setReturnDate(payload.getReturnDate());
+
             rentalDAO.insert(newRental);
 
-            AuthorRentalQueueManager arqm = new AuthorRentalQueueManager();
-            arqm.sendMessage(String.format("Rented book: %s by author: %s", newRental.getBook().getTitle(), newRental.getBook().getAuthor().getName() + " " + newRental.getBook().getAuthor().getSurname()));
+            queueManager.sendMessage("TEST");
 
             return Response.ok().entity(newRental).build();
         } catch (Exception e) {
