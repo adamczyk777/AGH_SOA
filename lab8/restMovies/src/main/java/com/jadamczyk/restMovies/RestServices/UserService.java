@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/user")
+@Path("/users")
 public class UserService {
     private UserDAO userDAO = new UserDAO();
 
@@ -35,7 +35,7 @@ public class UserService {
             User toDelete = userDAO.findById(id);
             userDAO.delete(toDelete);
             return Response
-                    .ok()
+                    .status(204)
                     .entity(toDelete)
                     .build();
         } catch (Exception e) {
@@ -44,7 +44,6 @@ public class UserService {
                     .build();
         }
     }
-
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -57,7 +56,7 @@ public class UserService {
             newUser.setAvatarUri(payload.getAvatarUri());
             userDAO.insert(newUser);
 
-            return Response.ok().entity(newUser).build();
+            return Response.status(201).entity(newUser).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }

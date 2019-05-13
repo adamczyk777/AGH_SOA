@@ -2,13 +2,14 @@ package com.jadamczyk.restMovies.RestServices;
 
 import com.jadamczyk.restMovies.DAO.MovieDAO;
 import com.jadamczyk.restMovies.Entities.Movie;
+import com.jadamczyk.restMovies.JSON.MovieByTitle;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/movie")
+@Path("/movies")
 public class MovieService {
     private MovieDAO movieDAO = new MovieDAO();
 
@@ -35,7 +36,7 @@ public class MovieService {
             Movie toDelete = movieDAO.findById(id);
             movieDAO.delete(toDelete);
             return Response
-                    .ok()
+                    .status(Response.Status.NO_CONTENT)
                     .entity(toDelete)
                     .build();
         } catch (Exception e) {
@@ -45,6 +46,27 @@ public class MovieService {
         }
     }
 
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response getMovieByTitle(MovieByTitle payload) {
+        try {
+            List<Movie> movies = movieDAO.findAll();
+            for (Movie movie : movies) {
+                if (movie.getTitle() == payload.getTitle()) {
+                    return Response
+                            .ok()
+                            .entity(movie)
+                            .build();
+                }
+            }
+            return Response
+                .status(Response.Status.NOT_FOUND)
+                .build();
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
+    }
 
     @POST
     @Produces({MediaType.APPLICATION_JSON})
@@ -57,7 +79,7 @@ public class MovieService {
             newMovie.setUri(payload.getUri());
             movieDAO.insert(newMovie);
 
-            return Response.ok().entity(newMovie).build();
+            return Response.status(201).entity(newMovie).build();
         } catch (Exception e) {
             return Response.serverError().build();
         }

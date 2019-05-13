@@ -1,6 +1,7 @@
 package com.jadamczyk.restMovies.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -11,6 +12,16 @@ public class User {
     private String name;
     private String avatarUri;
 
+    @OneToMany(mappedBy = "user")
+    private List<CollectionElement> collection;
+
+    public List<CollectionElement> getCollection() {
+        return collection;
+    }
+
+    public void setCollection(List<CollectionElement> collection) {
+        this.collection = collection;
+    }
     public Integer getId() {
         return id;
     }

@@ -3,5 +3,5 @@ package com.jadamczyk.restMovies.RestServices;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/api")
+@ApplicationPath("/rest")
 public class RestApplicationConfig extends Application {}

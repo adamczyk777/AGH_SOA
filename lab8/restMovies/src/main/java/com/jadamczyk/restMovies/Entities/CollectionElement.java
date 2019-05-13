@@ -4,17 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_movie")
-public class CollectionItem {
+public class CollectionElement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "movie", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "movieId", referencedColumnName = "id")
     private Movie movie;
 
-    @OneToOne
-    @JoinColumn(name = "user", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
     public Integer getId() {
