@@ -1,9 +1,9 @@
 package com.jadamczyk.restMovies.JSON;
 
 public class MovieByTitle {
-    private String title;
+    private String query;
 
-    public String getTitle() {
-        return title;
+    public String getQuery() {
+        return query;
     }
 }

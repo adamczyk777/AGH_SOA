@@ -2,12 +2,12 @@ package com.jadamczyk.restMovies.RestServices;
 
 import com.jadamczyk.restMovies.DAO.MovieDAO;
 import com.jadamczyk.restMovies.Entities.Movie;
-import com.jadamczyk.restMovies.JSON.MovieByTitle;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/movies")
 public class MovieService {
@@ -15,10 +15,20 @@ public class MovieService {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getMovies() {
-        List<Movie> movies = movieDAO.findAll();
+    public Response getMovies(@QueryParam("title") String titleQuery) {
+        try {
+            List<Movie> movies = movieDAO.findAll();
+            if (titleQuery != null) {
+                System.out.println(titleQuery);
+                List<Movie> result = movies.stream().filter(el -> el.getTitle().contains(titleQuery)).collect(Collectors.toList());
+                return Response.ok().entity(result).build();
+            } else {
+                return Response.ok().entity(movies).build();
 
-        return Response.ok().entity(movies).build();
+            }
+        } catch (Exception e) {
+            return Response.serverError().build();
+        }
     }
 
     @GET
@@ -43,28 +53,6 @@ public class MovieService {
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .build();
-        }
-    }
-
-    @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response getMovieByTitle(MovieByTitle payload) {
-        try {
-            List<Movie> movies = movieDAO.findAll();
-            for (Movie movie : movies) {
-                if (movie.getTitle() == payload.getTitle()) {
-                    return Response
-                            .ok()
-                            .entity(movie)
-                            .build();
-                }
-            }
-            return Response
-                .status(Response.Status.NOT_FOUND)
-                .build();
-        } catch (Exception e) {
-            return Response.serverError().build();
         }
     }
 
